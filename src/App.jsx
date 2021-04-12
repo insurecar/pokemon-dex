@@ -7,7 +7,6 @@ const App = () => {
   const state = useSelector((state) => state.mainReducer.pokemons);
   const dispatch = useDispatch();
 
-  // console.log(state);
   useEffect(() => {
     dispatch(asyncLoadPokemons());
   }, []);

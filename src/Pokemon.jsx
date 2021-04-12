@@ -1,6 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { colors } from "./color";
+// import { initialState, reducer } from "./useReducer/useReducer";
+import { useSelector, useDispatch } from "react-redux";
+import { asyncLoadCharacteristic } from "./redux/action";
 
 const Pokemon = ({ pokemon: { name, url } }) => {
   const initialState = {
@@ -10,25 +13,32 @@ const Pokemon = ({ pokemon: { name, url } }) => {
     weight: "",
     name: "",
   };
-  const [data, setData] = useState(initialState);
-  console.log(data.id);
+
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => state.mainReducer.characteristics);
+  console.log(state);
+
+  // const [data, setData] = useState(initialState);
+  // console.log(state);
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      const { stats, types, id, name, weight } = response.data;
-      setData({
-        stats: stats.map((el) => el.base_stat),
-        types: types.map((el) => el.type.name),
-        id: id,
-        name,
-        weight,
-      });
-    });
+    dispatch(asyncLoadCharacteristic(url));
+    // axios.get(url).then((response) => {
+    //   const { stats, types, id, name, weight } = response.data;
+    //   setData({
+    //     stats: stats.map((el) => el.base_stat),
+    //     types: types.map((el) => el.type.name),
+    //     id: id,
+    //     name,
+    //     weight,
+    //   });
+    // });
   }, []);
 
   return (
     <li className="item">
-      <div className="item__image">
+      {/* <div className="item__image">
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
           alt="as"
@@ -36,12 +46,12 @@ const Pokemon = ({ pokemon: { name, url } }) => {
       </div>
       <div className="item__name">{data.name}</div>
       <div className="item__possibility">
-        {/* <span>jsdnjn</span>
-        <span>jsdnjn</span> */}
-        {data.types.map((el) => (
-          <span style={{ background: `${colors[el]}` }}>{el}</span>
-        ))}
-      </div>
+        {data.types.map((el, index) => (
+          <span key={el + index} style={{ background: `${colors[el]}` }}>
+            {el}
+          </span>
+        ))}{" "}
+      </div> */}
     </li>
   );
 };
