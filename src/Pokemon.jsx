@@ -16,14 +16,14 @@ const Pokemon = ({ pokemon: { name, url } }) => {
 
   const dispatch = useDispatch();
 
-  const state = useSelector((state) => state.mainReducer.characteristics);
-  console.log(state);
+  const state = useSelector((state) => state.mainReducer.pokemons);
+  // console.log("REAL STATE", state);
 
   // const [data, setData] = useState(initialState);
   // console.log(state);
 
   useEffect(() => {
-    dispatch(asyncLoadCharacteristic(url));
+    // dispatch(asyncLoadCharacteristic(url));
     // axios.get(url).then((response) => {
     //   const { stats, types, id, name, weight } = response.data;
     //   setData({
@@ -37,22 +37,25 @@ const Pokemon = ({ pokemon: { name, url } }) => {
   }, []);
 
   return (
-    <li className="item">
-      {/* <div className="item__image">
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
-          alt="as"
-        />
-      </div>
-      <div className="item__name">{data.name}</div>
-      <div className="item__possibility">
-        {data.types.map((el, index) => (
-          <span key={el + index} style={{ background: `${colors[el]}` }}>
-            {el}
-          </span>
-        ))}{" "}
-      </div> */}
-    </li>
+    <>
+      <div>asd</div>
+    </>
+    // <li className="item">
+    //   <div className="item__image">
+    //     <img
+    //       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`}
+    //       alt="as"
+    //     />
+    //   </div>
+    //   <div className="item__name">{data.name}</div>
+    //   <div className="item__possibility">
+    //     {data.types.map((el, index) => (
+    //       <span key={el + index} style={{ background: `${colors[el]}` }}>
+    //         {el}
+    //       </span>
+    //     ))}{" "}
+    //   </div>
+    // </li>
   );
 };
 
